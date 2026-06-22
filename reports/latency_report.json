@@ -1,0 +1,58 @@
+{
+  "run_date": "2026-06-22 15:19:26",
+  "environment": {
+    "python": "3.12",
+    "embedding_model": "BAAI/bge-m3",
+    "reranker_model": "BAAI/bge-reranker-v2-m3",
+    "llm_model": "gpt-4o-mini",
+    "num_chunks": 100,
+    "num_questions": 20,
+    "enrichment_cached": true
+  },
+  "total_seconds": 205.66,
+  "avg_per_query_seconds": 6.85,
+  "breakdown": [
+    {
+      "step": "M1 Chunking (hierarchical)",
+      "module": "M1",
+      "seconds": 0.22,
+      "percent": 0.1
+    },
+    {
+      "step": "M5 Enrichment",
+      "module": "M5",
+      "seconds": 0.0,
+      "percent": 0.0
+    },
+    {
+      "step": "M2 Indexing (BM25 + Dense)",
+      "module": "M2",
+      "seconds": 42.69,
+      "percent": 20.8
+    },
+    {
+      "step": "M3 Reranker load",
+      "module": "M3",
+      "seconds": 0.0,
+      "percent": 0.0
+    },
+    {
+      "step": "Eval: 20 queries (search+rerank+LLM)",
+      "module": "M2+M3+LLM",
+      "seconds": 136.98,
+      "percent": 66.6
+    },
+    {
+      "step": "M4 RAGAS evaluation",
+      "module": "M4",
+      "seconds": 25.76,
+      "percent": 12.5
+    }
+  ],
+  "ragas_scores": {
+    "faithfulness": 0.909090909090909,
+    "answer_relevancy": 0.8581962680952657,
+    "context_precision": 0.9999999999191665,
+    "context_recall": 0.95
+  }
+}

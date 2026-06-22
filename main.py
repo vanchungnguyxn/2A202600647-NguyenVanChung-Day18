@@ -29,9 +29,13 @@ def main():
     # Step 2: Production Pipeline
     print("\n📌 STEP 2: Running Production Pipeline...")
     print("-" * 40)
-    from src.pipeline import build_pipeline, evaluate_pipeline
-    search, reranker = build_pipeline()
-    prod_results = evaluate_pipeline(search, reranker)
+    from src.pipeline import build_pipeline, evaluate_pipeline, save_latency_report
+    latency: dict = {}
+    t_prod = time.time()
+    search, reranker, parent_texts = build_pipeline(latency)
+    prod_results, ragas_agg = evaluate_pipeline(search, reranker, parent_texts, latency=latency)
+    latency["total_s"] = round(time.time() - t_prod, 2)
+    save_latency_report(latency, ragas_scores=ragas_agg)
 
     # Move reports to reports/
     for f in ["ragas_report.json", "naive_baseline_report.json"]:
@@ -65,7 +69,8 @@ def main():
     print("  1. Điền analysis/failure_analysis.md")
     print("  2. Điền analysis/group_report.md")
     print("  3. Viết analysis/reflections/reflection_[Tên].md")
-    print("  4. Chạy: python check_lab.py")
+    print("  4. Xem reports/latency_report.md (latency breakdown)")
+    print("  5. Chạy: python check_lab.py")
 
 
 if __name__ == "__main__":

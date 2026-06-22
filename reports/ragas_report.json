@@ -1,0 +1,161 @@
+{
+  "aggregate": {
+    "faithfulness": 0.909090909090909,
+    "answer_relevancy": 0.8581962680952657,
+    "context_precision": 0.9999999999191665,
+    "context_recall": 0.95
+  },
+  "num_questions": 20,
+  "failures": [
+    {
+      "question": "Nhân viên tạm ứng 15 triệu, sau 20 ngày mới thanh toán. Bị phạt bao nhiêu?",
+      "answer": "Nhân viên tạm ứng 15 triệu và thanh toán sau 20 ngày. Theo chính sách, khoản tạm ứng chưa thanh toán sau 15 ngày sẽ bị tính phí 2%/tháng trên số tiền chưa hoàn ứng. \n\nSố tiền chưa hoàn ứng là 15.000.000 VNĐ. \n\nPhí phạt sẽ được tính như sau:\n- Thời gian quá hạn: 20 ngày - 15 ngày = 5 ngày. \n- Tính phí phạt cho 1 tháng (30 ngày) là 2% của 15.000.000 VNĐ, tức là 300.000 VNĐ.\n- Phí phạt cho 5 ngày sẽ là (300.000 VNĐ / 30 ngày) * 5 ngày = 50.000 VNĐ.\n\nVậy, nhân viên sẽ bị phạt 50.000 VNĐ.",
+      "ground_truth": "Thời hạn thanh toán là 15 ngày. Quá hạn 5 ngày, bị tính phí 2%/tháng trên 15.000.000 VNĐ = 300.000 VNĐ/tháng (tính pro-rata khoảng 50.000 VNĐ cho 5 ngày).",
+      "worst_metric": "faithfulness",
+      "score": 0.7532317812976369,
+      "metrics": {
+        "faithfulness": 0.18181818181818182,
+        "answer_relevancy": 0.8311089434723656,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      },
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature"
+    },
+    {
+      "question": "Nhân viên được tài trợ khóa học 25 triệu, nghỉ việc sau 8 tháng hoàn thành khóa học. Phải hoàn trả bao nhiêu?",
+      "answer": "Nhân viên phải hoàn trả **100% chi phí** đào tạo đã được tài trợ, tức là **25 triệu VNĐ**.",
+      "ground_truth": "Nhân viên phải cam kết làm việc ít nhất 1 năm sau khi hoàn thành khóa học. Nghỉ sau 8 tháng là trước hạn cam kết, phải hoàn trả 100% chi phí tức 25.000.000 VNĐ.",
+      "worst_metric": "faithfulness",
+      "score": 0.8248459430487449,
+      "metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.7993837722949796,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      },
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature"
+    },
+    {
+      "question": "Nghỉ phép không lương 20 ngày cần ai phê duyệt?",
+      "answer": "Nghỉ phép không lương 20 ngày cần phê duyệt của **Giám đốc điều hành (CEO)**.",
+      "ground_truth": "Nghỉ 16-30 ngày cần phê duyệt của Giám đốc điều hành (CEO). Lưu ý: nghỉ trên 14 ngày không lương, nhân viên phải tự đóng phần bảo hiểm của mình.",
+      "worst_metric": "faithfulness",
+      "score": 0.8312095497351898,
+      "metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.8248381990407591,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      },
+      "diagnosis": "LLM hallucinating",
+      "suggested_fix": "Tighten prompt, lower temperature"
+    },
+    {
+      "question": "Một nhân viên Senior có 9 năm thâm niên được nghỉ bao nhiêu ngày phép năm và lương trong khoảng nào?",
+      "answer": "Nhân viên Senior có 9 năm thâm niên sẽ được hưởng **18 ngày phép năm** (15 ngày phép cơ bản + 3 ngày phép cộng thêm cho 9 năm thâm niên). \n\nVề lương, thông tin không được cung cấp trong tài liệu.",
+      "ground_truth": "Theo chính sách v2024: 15 ngày cơ bản + 3 ngày thâm niên (9÷3=3) = 18 ngày phép. Lương Senior (P3-P4): 20-35 triệu VNĐ/tháng.",
+      "worst_metric": "context_recall",
+      "score": 0.840811987329176,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8632479493667038,
+        "context_precision": 0.99999999995,
+        "context_recall": 0.5
+      },
+      "diagnosis": "Missing relevant chunks",
+      "suggested_fix": "Improve chunking or add BM25"
+    },
+    {
+      "question": "Có cần kích hoạt xác thực đa yếu tố (MFA) không?",
+      "answer": "Có, tất cả nhân viên **bắt buộc** kích hoạt xác thực đa yếu tố (MFA) cho tài khoản email, VPN và các hệ thống nội bộ.",
+      "ground_truth": "Có, theo chính sách mật khẩu v2.0 hiện hành, tất cả nhân viên bắt buộc kích hoạt MFA cho email, VPN và hệ thống nội bộ. Chính sách cũ v1.0 không yêu cầu MFA.",
+      "worst_metric": "context_recall",
+      "score": 0.8509732576109061,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9038930305436246,
+        "context_precision": 0.9999999999,
+        "context_recall": 0.5
+      },
+      "diagnosis": "Missing relevant chunks",
+      "suggested_fix": "Improve chunking or add BM25"
+    },
+    {
+      "question": "Thâm niên bao nhiêu năm thì được cộng thêm ngày phép?",
+      "answer": "Nhân viên có thâm niên từ **3 năm trở lên** được cộng thêm **1 ngày phép** cho mỗi 3 năm làm việc liên tục.",
+      "ground_truth": "Theo chính sách v2024 hiện hành, nhân viên có thâm niên từ 3 năm trở lên được cộng thêm 1 ngày phép cho mỗi 3 năm. Chính sách cũ v2023 yêu cầu 5 năm.",
+      "worst_metric": "answer_relevancy",
+      "score": 0.9478284356973832,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7913137428895328,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      },
+      "diagnosis": "Answer doesn't match question",
+      "suggested_fix": "Improve prompt template"
+    },
+    {
+      "question": "Lương thử việc của nhân viên Junior mức cao nhất là bao nhiêu?",
+      "answer": "Lương thử việc của nhân viên Junior (P1-P2) là 85% của mức lương gross từ 12.000.000 VNĐ đến 20.000.000 VNĐ. Mức cao nhất của lương thử việc sẽ là 85% của 20.000.000 VNĐ, tức là 17.000.000 VNĐ.",
+      "ground_truth": "Junior cao nhất là 20.000.000 VNĐ/tháng. Lương thử việc = 85% x 20.000.000 = 17.000.000 VNĐ/tháng.",
+      "worst_metric": "answer_relevancy",
+      "score": 0.9499333785472306,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7997335142389224,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0
+      },
+      "diagnosis": "Answer doesn't match question",
+      "suggested_fix": "Improve prompt template"
+    },
+    {
+      "question": "Khi phát hiện malware trên máy, nhân viên có nên tự xử lý không?",
+      "answer": "Nhân viên **không nên tự ý xử lý malware** hoặc tìm cách khắc phục mà không có sự hướng dẫn của đội CNTT. Việc tự xử lý sẽ bị xem là vi phạm nghiêm trọng quy chế bảo mật.",
+      "ground_truth": "KHÔNG. Nhân viên tuyệt đối không được tự ý xử lý malware. Phải báo cáo trong vòng 1 giờ qua helpdesk@cty.vn hoặc hotline CNTT. Tự ý xử lý bị coi là vi phạm nghiêm trọng.",
+      "worst_metric": "answer_relevancy",
+      "score": 0.9536836633933317,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8147346536733265,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      },
+      "diagnosis": "Answer doesn't match question",
+      "suggested_fix": "Improve prompt template"
+    },
+    {
+      "question": "Phụ cấp ăn trưa hàng tháng là bao nhiêu?",
+      "answer": "Phụ cấp ăn trưa hàng tháng là **1.000.000 VNĐ/tháng**.",
+      "ground_truth": "Phụ cấp ăn trưa là 1.000.000 VNĐ/tháng, chi trả cùng kỳ lương.",
+      "worst_metric": "answer_relevancy",
+      "score": 0.9538620611093208,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8154482445372832,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      },
+      "diagnosis": "Answer doesn't match question",
+      "suggested_fix": "Improve prompt template"
+    },
+    {
+      "question": "Bao lâu phải đổi mật khẩu một lần?",
+      "answer": "Mật khẩu phải được thay đổi **mỗi 120 ngày** theo Chính sách mật khẩu phiên bản hiện hành (v2.0).",
+      "ground_truth": "Theo chính sách hiện hành (v2.0), mật khẩu phải được thay đổi mỗi 120 ngày. Chính sách cũ yêu cầu 90 ngày nhưng đã bị thay thế.",
+      "worst_metric": "answer_relevancy",
+      "score": 0.9551243248063984,
+      "metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8204972992755938,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0
+      },
+      "diagnosis": "Answer doesn't match question",
+      "suggested_fix": "Improve prompt template"
+    }
+  ]
+}
